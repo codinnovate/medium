@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link , Outlet } from 'react-router-dom';
 import logo from '../imgs/logo.png';
 import { useState } from 'react';
 
@@ -7,6 +7,7 @@ const Navbar = () => {
     const [searchBoxVisibility, setSearchBoxVisibility] = useState(false);
 
     return (
+        <>
         <nav className='navbar'>
             <Link to='/' className='flex-none w-10 '>
             <img src={logo}  className='w-full'/>
@@ -35,19 +36,21 @@ const Navbar = () => {
                 </Link>
                 <Link
                     className='btn-dark py-2 '
-                    to='/sigin'
-                >
+                    to='/signin'
+                    >
                     Sign In
                 </Link>
                  <Link
                     className='btn-light py-2 hidden md:block'
-                    to='/sigin'
-                >
+                    to='/signup'
+                    >
                     Sign Up
                 </Link>
             </div>
 
         </nav>
+        <Outlet />
+        </>
     )
 }
 
