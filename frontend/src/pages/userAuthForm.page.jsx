@@ -7,7 +7,7 @@ import { Toaster, toast } from 'react-hot-toast';
 import axios from 'axios';
 import { storeInSession} from '../common/session'
 import { UserContext} from '../App';
-import { authWithGoogle} from '../common/firebase';
+// import { authWithGoogle} from '../common/firebase';
 
 
 const UserAuthForm = ({ type }) => {
@@ -22,8 +22,9 @@ const UserAuthForm = ({ type }) => {
             storeInSession("user", JSON.stringify(data))
             setUserAuth(data)
         })   
-        .catch(({reponse}) => {
-            toast.error(reponse.data.error)
+        .catch(({ response }) => {
+            console.log(response)
+            toast.error(response?.data?.error)
         })
     }
 
