@@ -54,8 +54,10 @@ const Navbar = () => {
                     <div className="relative">
                         <button
                         onClick={handleUserNavPanel}
-                         className='w-12 h-12  mt-1'>
-                            <img src={profile_img} className='w-full h-full object-cover rounded-full '/>
+                        className='w-12 h-12  mt-1'>
+                        <img
+                        src={profile_img}
+                        className='w-full h-full object-cover rounded-full ' />
                         </button>
                         {
                         userNavPanel ? 
@@ -63,9 +65,9 @@ const Navbar = () => {
                         : ""
                         }
                     </div>
-                </>
-                :
-                <>
+                        </>
+                        :
+                        <>
                 <Link
                     className='btn-dark py-2 '
                     to='/signin'

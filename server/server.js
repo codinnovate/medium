@@ -26,11 +26,11 @@ mongoose.connect(process.env.DB_LOCATION, {
 
 const generateUsername = async(email) => {
     let username = email.split("@")[0];
-    let isNotUniqueUsername = await User.exists({
-        "personal_info": username
+    let usernameExists = await User.exists({
+        "personal_info.username": username
     })
-        .then((result) => result)
-    isNotUniqueUsername ? username += nanoid().substring(0, 5) : "";
+    .then((result) => result)
+    usernameExists ? username += nanoid().substring(0, 5) : "";
     return username
 }
 
@@ -81,16 +81,15 @@ server.post("/signup", (req, res) => {
         let username = await generateUsername(email);
         let user = new User({
             personal_info: {
-                fullname, email, password:hash_password }
+                fullname, email, password:hash_password , username}
         })
-        user.save()
-            .then((u) => {
+        user.save().then((u) => {
             return res.status(200).json(formatDatatoSend(u))
         })
-            .catch(err => {
-                if (err.code == 11000) {
-                return res.status(500).json({"error":"Emaol already exists"})
-            }
+        .catch(err => {
+            //     if (err.code == 11000) {
+            //     return res.status(500).json({"error":"Email already exists"})
+            // }
             return res.status(500).json({"error":err.message})
         })
     })
